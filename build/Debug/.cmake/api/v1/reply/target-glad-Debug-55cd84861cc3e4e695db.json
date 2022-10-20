@@ -1,0 +1,118 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "libglad.a"
+		}
+	],
+	"backtrace" : 4,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"_add_library",
+			"add_library",
+			"include",
+			"target_include_directories",
+			"target_sources"
+		],
+		"files" : 
+		[
+			"C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake",
+			"cmake/BuildGlad.cmake",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 10,
+				"parent" : 0
+			},
+			{
+				"file" : 1,
+				"parent" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 1,
+				"parent" : 2
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 613,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 4,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 3,
+				"parent" : 2
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 5,
+					"path" : "D:/Users/user/Desktop/readRAW/ext/glad/include"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"id" : "glad::@6890427a1f51a3e7e1df",
+	"name" : "glad",
+	"nameOnDisk" : "libglad.a",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 6,
+			"compileGroupIndex" : 0,
+			"path" : "ext/glad/src/glad.c",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

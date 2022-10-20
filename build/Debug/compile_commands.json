@@ -1,0 +1,67 @@
+[
+{
+  "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
+  "command": "C:\\TDM-GCC-64\\bin\\g++.exe -DGLFW_DLL -ID:/Users/user/Desktop/readRAW/include -ID:/Users/user/Desktop/readRAW/ext/glad/include -ID:/Users/user/Desktop/readRAW/ext/imgui/backends -ID:/Users/user/Desktop/readRAW/ext/imgui -isystem C:/dev/vcpkg/installed/x64-mingw-dynamic/include -g -std=gnu++17 -o CMakeFiles\\SOM.dir\\src\\main.obj -c D:\\Users\\user\\Desktop\\readRAW\\src\\main.cpp",
+  "file": "D:\\Users\\user\\Desktop\\readRAW\\src\\main.cpp"
+},
+{
+  "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
+  "command": "C:\\TDM-GCC-64\\bin\\g++.exe -DGLFW_DLL -ID:/Users/user/Desktop/readRAW/include -ID:/Users/user/Desktop/readRAW/ext/glad/include -ID:/Users/user/Desktop/readRAW/ext/imgui/backends -ID:/Users/user/Desktop/readRAW/ext/imgui -isystem C:/dev/vcpkg/installed/x64-mingw-dynamic/include -g -std=gnu++17 -o CMakeFiles\\SOM.dir\\src\\world.obj -c D:\\Users\\user\\Desktop\\readRAW\\src\\world.cpp",
+  "file": "D:\\Users\\user\\Desktop\\readRAW\\src\\world.cpp"
+},
+{
+  "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
+  "command": "C:\\TDM-GCC-64\\bin\\g++.exe -DGLFW_DLL -ID:/Users/user/Desktop/readRAW/include -ID:/Users/user/Desktop/readRAW/ext/glad/include -ID:/Users/user/Desktop/readRAW/ext/imgui/backends -ID:/Users/user/Desktop/readRAW/ext/imgui -isystem C:/dev/vcpkg/installed/x64-mingw-dynamic/include -g -std=gnu++17 -o CMakeFiles\\SOM.dir\\src\\matrixStack.obj -c D:\\Users\\user\\Desktop\\readRAW\\src\\matrixStack.cpp",
+  "file": "D:\\Users\\user\\Desktop\\readRAW\\src\\matrixStack.cpp"
+},
+{
+  "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
+  "command": "C:\\TDM-GCC-64\\bin\\g++.exe -DGLFW_DLL -ID:/Users/user/Desktop/readRAW/include -ID:/Users/user/Desktop/readRAW/ext/glad/include -ID:/Users/user/Desktop/readRAW/ext/imgui/backends -ID:/Users/user/Desktop/readRAW/ext/imgui -isystem C:/dev/vcpkg/installed/x64-mingw-dynamic/include -g -std=gnu++17 -o CMakeFiles\\SOM.dir\\src\\SOM.obj -c D:\\Users\\user\\Desktop\\readRAW\\src\\SOM.cpp",
+  "file": "D:\\Users\\user\\Desktop\\readRAW\\src\\SOM.cpp"
+},
+{
+  "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
+  "command": "C:\\TDM-GCC-64\\bin\\g++.exe -DGLFW_DLL -ID:/Users/user/Desktop/readRAW/include -ID:/Users/user/Desktop/readRAW/ext/glad/include -ID:/Users/user/Desktop/readRAW/ext/imgui/backends -ID:/Users/user/Desktop/readRAW/ext/imgui -isystem C:/dev/vcpkg/installed/x64-mingw-dynamic/include -g -std=gnu++17 -o CMakeFiles\\SOM.dir\\src\\RAWmodel.obj -c D:\\Users\\user\\Desktop\\readRAW\\src\\RAWmodel.cpp",
+  "file": "D:\\Users\\user\\Desktop\\readRAW\\src\\RAWmodel.cpp"
+},
+{
+  "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
+  "command": "C:\\TDM-GCC-64\\bin\\gcc.exe -ID:/Users/user/Desktop/readRAW/ext/glad/include -g -o CMakeFiles\\glad.dir\\ext\\glad\\src\\glad.obj -c D:\\Users\\user\\Desktop\\readRAW\\ext\\glad\\src\\glad.c",
+  "file": "D:\\Users\\user\\Desktop\\readRAW\\ext\\glad\\src\\glad.c"
+},
+{
+  "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
+  "command": "C:\\TDM-GCC-64\\bin\\g++.exe -DGLFW_DLL -ID:/Users/user/Desktop/readRAW/ext/imgui/backends -ID:/Users/user/Desktop/readRAW/ext/imgui -isystem C:/dev/vcpkg/installed/x64-mingw-dynamic/include -g -o CMakeFiles\\imgui.dir\\ext\\imgui\\imgui_demo.obj -c D:\\Users\\user\\Desktop\\readRAW\\ext\\imgui\\imgui_demo.cpp",
+  "file": "D:\\Users\\user\\Desktop\\readRAW\\ext\\imgui\\imgui_demo.cpp"
+},
+{
+  "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
+  "command": "C:\\TDM-GCC-64\\bin\\g++.exe -DGLFW_DLL -ID:/Users/user/Desktop/readRAW/ext/imgui/backends -ID:/Users/user/Desktop/readRAW/ext/imgui -isystem C:/dev/vcpkg/installed/x64-mingw-dynamic/include -g -o CMakeFiles\\imgui.dir\\ext\\imgui\\imgui_draw.obj -c D:\\Users\\user\\Desktop\\readRAW\\ext\\imgui\\imgui_draw.cpp",
+  "file": "D:\\Users\\user\\Desktop\\readRAW\\ext\\imgui\\imgui_draw.cpp"
+},
+{
+  "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
+  "command": "C:\\TDM-GCC-64\\bin\\g++.exe -DGLFW_DLL -ID:/Users/user/Desktop/readRAW/ext/imgui/backends -ID:/Users/user/Desktop/readRAW/ext/imgui -isystem C:/dev/vcpkg/installed/x64-mingw-dynamic/include -g -o CMakeFiles\\imgui.dir\\ext\\imgui\\imgui_tables.obj -c D:\\Users\\user\\Desktop\\readRAW\\ext\\imgui\\imgui_tables.cpp",
+  "file": "D:\\Users\\user\\Desktop\\readRAW\\ext\\imgui\\imgui_tables.cpp"
+},
+{
+  "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
+  "command": "C:\\TDM-GCC-64\\bin\\g++.exe -DGLFW_DLL -ID:/Users/user/Desktop/readRAW/ext/imgui/backends -ID:/Users/user/Desktop/readRAW/ext/imgui -isystem C:/dev/vcpkg/installed/x64-mingw-dynamic/include -g -o CMakeFiles\\imgui.dir\\ext\\imgui\\imgui_widgets.obj -c D:\\Users\\user\\Desktop\\readRAW\\ext\\imgui\\imgui_widgets.cpp",
+  "file": "D:\\Users\\user\\Desktop\\readRAW\\ext\\imgui\\imgui_widgets.cpp"
+},
+{
+  "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
+  "command": "C:\\TDM-GCC-64\\bin\\g++.exe -DGLFW_DLL -ID:/Users/user/Desktop/readRAW/ext/imgui/backends -ID:/Users/user/Desktop/readRAW/ext/imgui -isystem C:/dev/vcpkg/installed/x64-mingw-dynamic/include -g -o CMakeFiles\\imgui.dir\\ext\\imgui\\imgui.obj -c D:\\Users\\user\\Desktop\\readRAW\\ext\\imgui\\imgui.cpp",
+  "file": "D:\\Users\\user\\Desktop\\readRAW\\ext\\imgui\\imgui.cpp"
+},
+{
+  "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
+  "command": "C:\\TDM-GCC-64\\bin\\g++.exe -DGLFW_DLL -ID:/Users/user/Desktop/readRAW/ext/imgui/backends -ID:/Users/user/Desktop/readRAW/ext/imgui -isystem C:/dev/vcpkg/installed/x64-mingw-dynamic/include -g -o CMakeFiles\\imgui.dir\\ext\\imgui\\backends\\imgui_impl_glfw.obj -c D:\\Users\\user\\Desktop\\readRAW\\ext\\imgui\\backends\\imgui_impl_glfw.cpp",
+  "file": "D:\\Users\\user\\Desktop\\readRAW\\ext\\imgui\\backends\\imgui_impl_glfw.cpp"
+},
+{
+  "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
+  "command": "C:\\TDM-GCC-64\\bin\\g++.exe -DGLFW_DLL -ID:/Users/user/Desktop/readRAW/ext/imgui/backends -ID:/Users/user/Desktop/readRAW/ext/imgui -isystem C:/dev/vcpkg/installed/x64-mingw-dynamic/include -g -o CMakeFiles\\imgui.dir\\ext\\imgui\\backends\\imgui_impl_opengl3.obj -c D:\\Users\\user\\Desktop\\readRAW\\ext\\imgui\\backends\\imgui_impl_opengl3.cpp",
+  "file": "D:\\Users\\user\\Desktop\\readRAW\\ext\\imgui\\backends\\imgui_impl_opengl3.cpp"
+}
+]

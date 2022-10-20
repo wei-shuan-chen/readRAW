@@ -2,11 +2,10 @@
 #define RAWMODEL_H
 
 #include <vector>
-#include <glm/glm.hpp>
 #include <iostream>
 #include <string>
 
-#include "Vertex.h"
+#include "BounderVoxel.h"
 
 typedef unsigned char  BYTE;
 
@@ -27,8 +26,9 @@ public:
     void LoadFile(const char* infFileName,const char* rawFileName);
 
     InfData_t infdata;
+    VoxData_b* bounderVoxelData;
     int*** voxelData; // 0 air, 1 bounder, 2 inside
-
+    int bounderNum;
     
 private:
     bool LoadINFfile(const char* infFileName);
@@ -36,7 +36,9 @@ private:
     bool LoadRAWfile(const char*rawFileName);
     bool SetSampleType(const char* type);
     bool ReadRawFile(FILE *file);
-    void SetVoxelNum();
+    void SetVoxelData();
+    void CreateBounderVoxelLocate();
+    void SetbounderVoxelFaceAir(int i, int j, int k, int num);
     void checkComputerEndian();
 
     BYTE* uc_voxelData;

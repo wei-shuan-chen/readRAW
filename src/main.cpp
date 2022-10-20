@@ -31,8 +31,7 @@ float lastFrame = 0.0f;
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 15.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 int main()
 {
 	// glfw: initialize and configure
@@ -82,14 +81,15 @@ int main()
 	// ------------------------------------
 
 	Shader ourShader("shader/vShader.vs", "shader/fShader.fs");	
-
+	int numVoxelFace = 0;
 	RAWmodel rawmodel;
-	// rawmodel.LoadFile("raw/tetrahedron.inf", "raw/tetrahedron.raw");
+	// rawmodel.LoadFile("raw/tetrahedronno.inf", "raw/tetrahedronno.raw");
 	// rawmodel.LoadFile("raw/cube.inf", "raw/cube.raw");
-	rawmodel.LoadFile("raw/ball.inf", "raw/ball.raw");
-	create_world();
+	rawmodel.LoadFile("raw/ball67.inf", "raw/ball67.raw");
+	create_world(rawmodel.bounderVoxelData, rawmodel.bounderNum,&numVoxelFace);
+	std::cout <<"num : "<< numVoxelFace << std::endl;
 	Item cube(world.cube);
-
+	Item voxelball(world.voxelBall);
 	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(window))
 	{
@@ -109,6 +109,10 @@ int main()
 
 		// render the triangle
 		ourShader.use();
+		
+		ourShader.setVec3("objectColor", 1.0f, 0.0f, 0.0f);
+        ourShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+        ourShader.setVec3("lightPos", camera.Position);
 
 		MatrixStack model;
 		MatrixStack view;
@@ -117,30 +121,17 @@ int main()
         projection.Save(glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f));
         ourShader.setMat4("view", view.Top());
         ourShader.setMat4("projection", projection.Top());
-
-		glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
-		// lattice
-        
-		for(int i = 0; i < rawmodel.infdata.resolution[0]; i++){
-			for(int j = 0; j < rawmodel.infdata.resolution[1]; j++){
-				for(int k = 0; k < rawmodel.infdata.resolution[2]; k++){
-					if(rawmodel.voxelData[i][j][k] != 0){
+	
+		model.Save(glm::scale(model.Top(), glm::vec3( 0.1, 0.1, 0.1)));
+		int x = (rawmodel.infdata.resolution[0]/2);
+		int y = (rawmodel.infdata.resolution[1]/2);
+		int z = (rawmodel.infdata.resolution[2]/2);
+		model.Save(glm::translate(model.Top(), glm::vec3(-x,-y,-z)));
+		ourShader.setMat4("model", model.Top());
+		glBindVertexArray(voxelball.VAO);
+		glDrawArrays(GL_TRIANGLES, 0, 6 * numVoxelFace);
+		// std::cout<< numVoxelFace << std::endl;
 						
-						model.Push();
-						if(rawmodel.voxelData[i][j][k] == 1) ourShader.setVec3("color", glm::vec3(1.0,0.0,0.0));
-						if(rawmodel.voxelData[i][j][k] == 2) ourShader.setVec3("color", glm::vec3(1.0,0.0,1.0));
-						model.Save(glm::scale(model.Top(), glm::vec3( 0.1, 0.1, 0.1)));
-						model.Save(glm::translate(model.Top(), glm::vec3(i, j, k)));
-						ourShader.setMat4("model", model.Top());
-						glBindVertexArray(cube.VAO);
-						glDrawArrays(GL_TRIANGLES, 0, 36);
-						model.Pop();
-					}
-				}
-			}
-		}
-
-
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		glfwSwapBuffers(window);
