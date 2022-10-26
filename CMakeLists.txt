@@ -22,6 +22,8 @@ target_sources(SOM PRIVATE
     "src/matrixStack.cpp"
     "src/SOM.cpp"
     "src/RAWmodel.cpp"
+    "src/Drawmodel.cpp"
+    "src/Gui.cpp"
 )
 target_sources(glad PRIVATE
     "ext/glad/src/glad.c"

@@ -5,9 +5,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/glm.hpp>
 
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
 
 #include "shader.h"
 #include "matrixStack.h"
@@ -16,6 +13,8 @@
 #include "SOM.h"
 #include "camera.h"
 #include "RAWmodel.h"
+#include "Drawmodel.h"
+#include "Gui.h"
 
 #include <math.h>
 #include <iostream>
@@ -63,24 +62,11 @@ int main()
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return -1;
 	}
-	// GL 3.0 + GLSL 130
-    const char* glsl_version = "#version 130";
-    
-    // Setup Dear ImGui context
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
 
-    // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
-    //ImGui::StyleColorsLight();
-    // Setup Platform/Renderer backends
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init(glsl_version);
+	imgui_init(window);
 	// build and compile our shader program
 	// ------------------------------------
-
-	Shader ourShader("shader/vShader.vs", "shader/fShader.fs");	
+	OurShader_Create();
 	int numVoxelFace = 0;
 	RAWmodel rawmodel;
 	// rawmodel.LoadFile("raw/tetrahedronno.inf", "raw/tetrahedronno.raw");
@@ -93,11 +79,7 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(window))
 	{
-
-		ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-		
+		imgui_create();
 		// move(keyboard&mouth)
 		float currentFrame = static_cast<float>(glfwGetTime());
 		deltaTime = currentFrame - lastFrame;
@@ -107,79 +89,23 @@ int main()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// render the triangle
-		ourShader.use();
-		ourShader.setVec3("viewPos", camera.Position);
-		
-	    // directional light
-        ourShader.setVec3("dirLight.direction", camera.Front);
-        ourShader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
-        ourShader.setVec3("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
-        ourShader.setVec3("dirLight.specular", 0.4f, 0.4f, 0.4f);	
-		//spotlight
-		// ourShader.setVec3("spotLight.position", camera.Position);
-        // ourShader.setVec3("spotLight.direction", camera.Front);
-        // ourShader.setVec3("spotLight.ambient", 0.0f, 0.0f, 0.0f);
-        // ourShader.setVec3("spotLight.diffuse", 1.0f, 1.0f, 1.0f);
-        // ourShader.setVec3("spotLight.specular", 1.0f, 1.0f, 1.0f);
-        // ourShader.setFloat("spotLight.constant", 1.0f);
-        // ourShader.setFloat("spotLight.linear", 0.09f);
-        // ourShader.setFloat("spotLight.quadratic", 0.032f);
-        // ourShader.setFloat("spotLight.cutOff", glm::cos(glm::radians(15.5f)));
-        // ourShader.setFloat("spotLight.outerCutOff", glm::cos(glm::radians(30.0f)));    
-
-		MatrixStack model;
-		MatrixStack view;
-		MatrixStack projection;
-		view.Save(camera.GetViewMatrix());
-        projection.Save(glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f));
-        ourShader.setMat4("view", view.Top());
-        ourShader.setMat4("projection", projection.Top());
-
+		Shader_init(camera.Position, camera.Front);
+		ViewProjection_Create(camera.GetViewMatrix(), camera.Zoom, SCR_WIDTH, SCR_HEIGHT);
 		//draw cube
-		// model.Push();
-		// // model.Save(glm::translate(model.Top(),camera.Position));
-		// ourShader.setMat4("model", model.Top());
-		// ourShader.setVec3("objectColor", 1.0f, 1.0f, 1.0f);
-		// glBindVertexArray(cube.VAO);
-		// glDrawArrays(GL_TRIANGLES, 0, 36);
-		// model.Pop();
-
-
+		Model_Cube_Create(cube.VAO);
 		//draw floor
-		model.Push();
-		model.Save(glm::scale(model.Top(), glm::vec3( 1000.0f, 1.0f, 1000.0f)));
-		model.Save(glm::translate(model.Top(), glm::vec3(-0.5f, 0.0f, -0.5)));
-		ourShader.setVec3("objectColor", 0.0f, 1.0f, 1.0f);
-		ourShader.setMat4("model", model.Top());
-		glBindVertexArray(floor.VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		model.Pop();
-
+		Model_Floor_Create(floor.VAO);
 		// draw model
-		model.Push();
-		model.Save(glm::scale(model.Top(), glm::vec3( 0.1, 0.1, 0.1)));
-		float x = (rawmodel.infdata.resolution[0]/2);
-		float z = (rawmodel.infdata.resolution[2]/2);
-		model.Save(glm::translate(model.Top(), glm::vec3(-x,0,-z)));
-		ourShader.setVec3("objectColor", 1.0f, 0.0f, 0.0f);
-		ourShader.setMat4("model", model.Top());
-		glBindVertexArray(voxelball.VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 6 * numVoxelFace);
-		model.Pop();
+		Model_Create(voxelball.VAO, numVoxelFace, (float)rawmodel.infdata.resolution[0]/2, (float)rawmodel.infdata.resolution[2]/2);
 
-	
-
-						
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		imgui_end();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
 	glfwTerminate();
 	destroy_world();
-	// SOM_Destroy();
+	SOM_Destroy();
 	return 0;
 }
 

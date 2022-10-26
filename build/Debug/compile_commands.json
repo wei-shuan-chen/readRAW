@@ -26,6 +26,16 @@
 },
 {
   "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
+  "command": "C:\\TDM-GCC-64\\bin\\g++.exe -DGLFW_DLL -ID:/Users/user/Desktop/readRAW/include -ID:/Users/user/Desktop/readRAW/ext/glad/include -ID:/Users/user/Desktop/readRAW/ext/imgui/backends -ID:/Users/user/Desktop/readRAW/ext/imgui -isystem C:/dev/vcpkg/installed/x64-mingw-dynamic/include -g -std=gnu++17 -o CMakeFiles\\SOM.dir\\src\\Drawmodel.obj -c D:\\Users\\user\\Desktop\\readRAW\\src\\Drawmodel.cpp",
+  "file": "D:\\Users\\user\\Desktop\\readRAW\\src\\Drawmodel.cpp"
+},
+{
+  "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
+  "command": "C:\\TDM-GCC-64\\bin\\g++.exe -DGLFW_DLL -ID:/Users/user/Desktop/readRAW/include -ID:/Users/user/Desktop/readRAW/ext/glad/include -ID:/Users/user/Desktop/readRAW/ext/imgui/backends -ID:/Users/user/Desktop/readRAW/ext/imgui -isystem C:/dev/vcpkg/installed/x64-mingw-dynamic/include -g -std=gnu++17 -o CMakeFiles\\SOM.dir\\src\\Gui.obj -c D:\\Users\\user\\Desktop\\readRAW\\src\\Gui.cpp",
+  "file": "D:\\Users\\user\\Desktop\\readRAW\\src\\Gui.cpp"
+},
+{
+  "directory": "D:/Users/user/Desktop/readRAW/build/Debug",
   "command": "C:\\TDM-GCC-64\\bin\\gcc.exe -ID:/Users/user/Desktop/readRAW/ext/glad/include -g -o CMakeFiles\\glad.dir\\ext\\glad\\src\\glad.obj -c D:\\Users\\user\\Desktop\\readRAW\\ext\\glad\\src\\glad.c",
   "file": "D:\\Users\\user\\Desktop\\readRAW\\ext\\glad\\src\\glad.c"
 },
