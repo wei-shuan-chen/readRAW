@@ -31,7 +31,7 @@ float lastFrame = 0.0f;
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-Camera camera(glm::vec3(0.0f, 0.0f, 15.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+Camera camera(glm::vec3(0.0f, 2.0f, 15.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 int main()
 {
 	// glfw: initialize and configure
@@ -87,9 +87,9 @@ int main()
 	// rawmodel.LoadFile("raw/cube.inf", "raw/cube.raw");
 	rawmodel.LoadFile("raw/ball67.inf", "raw/ball67.raw");
 	create_world(rawmodel.bounderVoxelData, rawmodel.bounderNum,&numVoxelFace);
-	std::cout <<"num : "<< numVoxelFace << std::endl;
-	Item cube(world.cube);
+	Item floor(world.square);
 	Item voxelball(world.voxelBall);
+	Item cube(world.cube);
 	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(window))
 	{
@@ -109,10 +109,24 @@ int main()
 
 		// render the triangle
 		ourShader.use();
+		ourShader.setVec3("viewPos", camera.Position);
 		
-		ourShader.setVec3("objectColor", 1.0f, 0.0f, 0.0f);
-        ourShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-        ourShader.setVec3("lightPos", camera.Position);
+	    // directional light
+        ourShader.setVec3("dirLight.direction", camera.Front);
+        ourShader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
+        ourShader.setVec3("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
+        ourShader.setVec3("dirLight.specular", 0.4f, 0.4f, 0.4f);	
+		//spotlight
+		// ourShader.setVec3("spotLight.position", camera.Position);
+        // ourShader.setVec3("spotLight.direction", camera.Front);
+        // ourShader.setVec3("spotLight.ambient", 0.0f, 0.0f, 0.0f);
+        // ourShader.setVec3("spotLight.diffuse", 1.0f, 1.0f, 1.0f);
+        // ourShader.setVec3("spotLight.specular", 1.0f, 1.0f, 1.0f);
+        // ourShader.setFloat("spotLight.constant", 1.0f);
+        // ourShader.setFloat("spotLight.linear", 0.09f);
+        // ourShader.setFloat("spotLight.quadratic", 0.032f);
+        // ourShader.setFloat("spotLight.cutOff", glm::cos(glm::radians(15.5f)));
+        // ourShader.setFloat("spotLight.outerCutOff", glm::cos(glm::radians(30.0f)));    
 
 		MatrixStack model;
 		MatrixStack view;
@@ -121,16 +135,41 @@ int main()
         projection.Save(glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f));
         ourShader.setMat4("view", view.Top());
         ourShader.setMat4("projection", projection.Top());
-	
+
+		//draw cube
+		// model.Push();
+		// // model.Save(glm::translate(model.Top(),camera.Position));
+		// ourShader.setMat4("model", model.Top());
+		// ourShader.setVec3("objectColor", 1.0f, 1.0f, 1.0f);
+		// glBindVertexArray(cube.VAO);
+		// glDrawArrays(GL_TRIANGLES, 0, 36);
+		// model.Pop();
+
+
+		//draw floor
+		model.Push();
+		model.Save(glm::scale(model.Top(), glm::vec3( 1000.0f, 1.0f, 1000.0f)));
+		model.Save(glm::translate(model.Top(), glm::vec3(-0.5f, 0.0f, -0.5)));
+		ourShader.setVec3("objectColor", 0.0f, 1.0f, 1.0f);
+		ourShader.setMat4("model", model.Top());
+		glBindVertexArray(floor.VAO);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		model.Pop();
+
+		// draw model
+		model.Push();
 		model.Save(glm::scale(model.Top(), glm::vec3( 0.1, 0.1, 0.1)));
-		int x = (rawmodel.infdata.resolution[0]/2);
-		int y = (rawmodel.infdata.resolution[1]/2);
-		int z = (rawmodel.infdata.resolution[2]/2);
-		model.Save(glm::translate(model.Top(), glm::vec3(-x,-y,-z)));
+		float x = (rawmodel.infdata.resolution[0]/2);
+		float z = (rawmodel.infdata.resolution[2]/2);
+		model.Save(glm::translate(model.Top(), glm::vec3(-x,0,-z)));
+		ourShader.setVec3("objectColor", 1.0f, 0.0f, 0.0f);
 		ourShader.setMat4("model", model.Top());
 		glBindVertexArray(voxelball.VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6 * numVoxelFace);
-		// std::cout<< numVoxelFace << std::endl;
+		model.Pop();
+
+	
+
 						
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

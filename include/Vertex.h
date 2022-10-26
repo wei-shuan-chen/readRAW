@@ -9,9 +9,9 @@ struct Vertex{
     struct Normal {
         float xn, yn, zn;
     };
-    // struct Texcoord {
-    //     float s,t;
-    // };
+    struct Texcoord {
+        float s,t;
+    };
     Position position;
     Normal normal;
     // Texcoord texcoord;
