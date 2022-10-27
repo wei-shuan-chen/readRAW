@@ -71,7 +71,7 @@ int main()
 	RAWmodel rawmodel;
 	// rawmodel.LoadFile("raw/tetrahedronno.inf", "raw/tetrahedronno.raw");
 	// rawmodel.LoadFile("raw/cube.inf", "raw/cube.raw");
-	rawmodel.LoadFile("raw/ball67.inf", "raw/ball67.raw");
+	rawmodel.LoadFile("raw/vase01.inf", "raw/vase01.raw");
 	create_world(rawmodel.bounderVoxelData, rawmodel.bounderNum,&numVoxelFace);
 	Item floor(world.square);
 	Item voxelball(world.voxelBall);

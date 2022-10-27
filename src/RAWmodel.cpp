@@ -98,12 +98,12 @@ void RAWmodel::CreateVoxel(){
         d_voxelData = (double*)malloc(sizeof(double)* infdata.resolution[0] * infdata.resolution[1] * infdata.resolution[2]);
     }
 
-    voxelData = (int***)malloc(sizeof(int**) * infdata.resolution[0]);
-    for(int i = 0; i < infdata.resolution[0]; i++){
+    voxelData = (int***)malloc(sizeof(int**) * infdata.resolution[2]);
+    for(int i = 0; i < infdata.resolution[2]; i++){
         voxelData[i] = (int**)malloc(sizeof(int*) * infdata.resolution[1]);
         for(int j = 0; j < infdata.resolution[1]; j++){
-            voxelData[i][j] = (int*)malloc(sizeof(int) * infdata.resolution[2]);
-            for(int k = 0; k < infdata.resolution[2]; k++){
+            voxelData[i][j] = (int*)malloc(sizeof(int) * infdata.resolution[0]);
+            for(int k = 0; k < infdata.resolution[0]; k++){
                 voxelData[i][j][k] = 0;
             }
         }
@@ -142,10 +142,10 @@ bool RAWmodel::ReadRawFile(FILE *file){
     bounderNum = 0;
     if(infdata.type == 0){
         fread(uc_voxelData, sizeof(BYTE),size, file);
-        for(int i = 0; i < infdata.resolution[0]; i++){
+        for(int i = 0; i < infdata.resolution[2]; i++){
             for(int j = 0; j < infdata.resolution[1]; j++){
-                for(int k = 0; k < infdata.resolution[2]; k++){
-                    int num = k + j*infdata.resolution[2] + i*infdata.resolution[2]* infdata.resolution[1];
+                for(int k = 0; k < infdata.resolution[0]; k++){
+                    int num = k + j*infdata.resolution[0] + i*infdata.resolution[0]* infdata.resolution[1];
                     voxelData[i][j][k] = uc_voxelData[num];
                     if(voxelData[i][j][k] == 255){
                         bounderNum++;
@@ -157,10 +157,10 @@ bool RAWmodel::ReadRawFile(FILE *file){
         return true;
     }else if(infdata.type == 1){
         fread(f_voxelData, sizeof(float),size, file);
-        for(int i = 0; i < infdata.resolution[0]; i++){
+        for(int i = 0; i < infdata.resolution[2]; i++){
             for(int j = 0; j < infdata.resolution[1]; j++){
-                for(int k = 0; k < infdata.resolution[2]; k++){
-                    int num = k + j*infdata.resolution[2] + i*infdata.resolution[2]* infdata.resolution[1];
+                for(int k = 0; k < infdata.resolution[0]; k++){
+                    int num = k + j*infdata.resolution[0] + i*infdata.resolution[0]* infdata.resolution[1];
                     voxelData[i][j][k] = f_voxelData[num];
                     if(voxelData[i][j][k] == 255){
                         bounderNum++;
@@ -172,10 +172,10 @@ bool RAWmodel::ReadRawFile(FILE *file){
         return true;
     }else if(infdata.type == 2){
         fread(d_voxelData, sizeof(double),size, file);
-        for(int i = 0; i < infdata.resolution[0]; i++){
+        for(int i = 0; i < infdata.resolution[2]; i++){
             for(int j = 0; j < infdata.resolution[1]; j++){
-                for(int k = 0; k < infdata.resolution[2]; k++){
-                    int num = k + j*infdata.resolution[2] + i*infdata.resolution[2]* infdata.resolution[1];
+                for(int k = 0; k < infdata.resolution[0]; k++){
+                    int num = k + j*infdata.resolution[0] + i*infdata.resolution[0]* infdata.resolution[1];
                     voxelData[i][j][k] = d_voxelData[num];
                     if(voxelData[i][j][k] == 255){
                         bounderNum++;
@@ -197,9 +197,9 @@ void RAWmodel::CreateBounderVoxelLocate(){
 void RAWmodel::SetVoxelData(){
 
     int num = 0;
-    for(int i = 0; i < infdata.resolution[0]; i++){
+    for(int i = 0; i < infdata.resolution[02]; i++){
         for(int j = 0; j < infdata.resolution[1]; j++){
-            for(int k = 0; k < infdata.resolution[2]; k++){
+            for(int k = 0; k < infdata.resolution[0]; k++){
                 // std::cout << voxelData[i][j][k] <<" ";
                 if(voxelData[i][j][k] == 252) voxelData[i][j][k] =2;
                 else if(voxelData[i][j][k] == 0) voxelData[i][j][k] = 0;
