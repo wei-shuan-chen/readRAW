@@ -10,7 +10,7 @@
 // #include "Item.h"
 
 void OurShader_Create();
-void Shader_init(glm::vec3 position, glm::vec3 front);
+void Shader_init(glm::vec3 position, glm::vec3 front, bool blinn);
 
 void ViewProjection_Create(glm::mat4 viewMatrix, float zoom, int width, int height);
 void Model_Floor_Create(unsigned int VAO);

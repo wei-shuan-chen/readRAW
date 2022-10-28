@@ -31,6 +31,10 @@ float lastFrame = 0.0f;
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 Camera camera(glm::vec3(0.0f, 2.0f, 15.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+//light
+bool blinn = false;
+bool blinnKeyPressed = false;
+
 int main()
 {
 	// glfw: initialize and configure
@@ -71,7 +75,7 @@ int main()
 	RAWmodel rawmodel;
 	// rawmodel.LoadFile("raw/tetrahedronno.inf", "raw/tetrahedronno.raw");
 	// rawmodel.LoadFile("raw/cube.inf", "raw/cube.raw");
-	rawmodel.LoadFile("raw/vase01.inf", "raw/vase01.raw");
+	rawmodel.LoadFile("raw/ball67.inf", "raw/ball67.raw");
 	create_world(rawmodel.bounderVoxelData, rawmodel.bounderNum,&numVoxelFace);
 	Item floor(world.square);
 	Item voxelball(world.voxelBall);
@@ -89,7 +93,7 @@ int main()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		Shader_init(camera.Position, camera.Front);
+		Shader_init(camera.Position, camera.Front, blinn);
 		ViewProjection_Create(camera.GetViewMatrix(), camera.Zoom, SCR_WIDTH, SCR_HEIGHT);
 		//draw cube
 		Model_Cube_Create(cube.VAO);
@@ -143,6 +147,15 @@ void processInput(GLFWwindow *window)
 		camera.ProcessKeyboard(YAWUP, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
 		camera.ProcessKeyboard(YAWDOWN, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS && !blinnKeyPressed) 
+    {
+        blinn = !blinn;
+        blinnKeyPressed = true;
+		std::cout << (blinn ? "Blinn-Phong" : "Phong") << std::endl;
+    }
+    if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE) 
+    	blinnKeyPressed = false;
+    
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
