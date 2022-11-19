@@ -5,9 +5,11 @@
 ### 實作概念
 先把raw、inf檔讀進來(0為空氣)
 再找出接觸空氣的所有面，並定義好它的VAO、VBO，一次畫出來
+
 **注意:千萬不要把每個面定義一個正方形的VAO、VBO然後再while迴圈裡依序跑每個面，這樣跑迴圈會很慢**
 
 ![](./image/code0.png)
+
 ![](./image/code1.png)
 
 光照是用phing shading及blinn-phong phading，可按B鍵切換
