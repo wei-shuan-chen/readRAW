@@ -8,10 +8,10 @@ glm::fvec3 **lattice;
 glm::fvec3 *dataset;
 
 int go = 0;
-bool tmp = true;
+bool stop = true;
 bool is_som_finished = false;
-const int map_width = 10;
-const int map_height = 10;
+int map_width;
+int map_height;
 int datasteNum = 0;
 const int max_iter = 20000;
 int iter = 0;
@@ -21,8 +21,8 @@ double n_learning_rate = 0.1;
 double neighbor = 5;
 
 
-glm::fvec3 **createMap(int map_width, int map_height, glm::fvec3 m_MaxPos, glm::fvec3 m_MinPos);
-glm::fvec3 *createInputDataset(std::vector<Vertex> m_MeshTri, int triangleNum);
+glm::fvec3 **createMap(int map_width, int map_height, int *max);
+glm::fvec3 *createInputDataset(VoxData_b* bounderVoxelData, int bounderNum);
 const glm::fvec3 getInput(glm::fvec3 *dataset, int datasteNum);
 void destroy(glm::fvec3 **arr, int width, int height);
 void destroyDataset(glm::fvec3 *arr, int datasteNum);
@@ -32,20 +32,23 @@ double computeradius(int iter, double fun);
 double computeScale(double sigma, double dist);
 bool isInNeighborhood(double squaredDist, double radius);
 
-void SOM_Create(std::vector<Vertex> m_MeshTri, int triangleNum, glm::fvec3 m_MaxPos, glm::fvec3 m_MinPos)
+void SOM_Create(VoxData_b* bounderVoxelData, int bounderNum, int *max)
 {
     srand(time(NULL));
-
+    map_width = 20;//sqrt(bounderNum)/2;
+    map_height = 20;//sqrt(bounderNum)/2;
+    cout << map_width << ", " << map_height<<endl;
     // 1. Create lattice
-    lattice = createMap(map_width, map_height, m_MaxPos, m_MinPos);
+    lattice = createMap(map_width, map_height, max);
     // 2. Create input dataset
-    dataset = createInputDataset(m_MeshTri, triangleNum);
+    dataset = createInputDataset(bounderVoxelData, bounderNum);
 
-    datasteNum = triangleNum;
+    datasteNum = bounderNum;
 }
 
 void SOM_IterateOnce()
 {
+    
     // 1. Get one input from the dataset
     // 2. Find BMU
     // 3. Update BMU and the neighbors
@@ -99,7 +102,7 @@ void SOM_IterateOnce()
         }
     }
     iter++; 
-    is_som_finished = (iter > max_iter);
+    // cout << iter<<endl;
 }
 
 void SOM_Destroy()
@@ -110,24 +113,25 @@ void SOM_Destroy()
     destroyDataset(dataset, datasteNum);
 }
 
-glm::fvec3 *createInputDataset(std::vector<Vertex> m_MeshTri, int triangleNum)
+glm::fvec3 *createInputDataset(VoxData_b* bounderVoxelData, int bounderNum)
 {
-    glm::fvec3 *dataset = (glm::fvec3 *)malloc(sizeof(glm::fvec3) * triangleNum);
+    glm::fvec3 *dataset = (glm::fvec3 *)malloc(sizeof(glm::fvec3) * bounderNum);
 
    
-    for (int i = 0; i < triangleNum; i++)
+    for (int i = 0; i < bounderNum; i++)
     {
-        double i0 = m_MeshTri[i].position.x;
-        double j0 = m_MeshTri[i].position.y;
-        double k0 = m_MeshTri[i].position.z;
+        double i0 = bounderVoxelData[i].bounderVoxelLocate.x;
+        double j0 = bounderVoxelData[i].bounderVoxelLocate.y;
+        double k0 = bounderVoxelData[i].bounderVoxelLocate.z;
         dataset[i] = {i0, j0, k0};
         // std::cout << i0<<", "<<j0<<", " <<k0<<", "<<std::endl;
     }
     return dataset;
 }
-glm::fvec3 **createMap(int map_width, int map_height, glm::fvec3 m_MaxPos, glm::fvec3 m_MinPos)
+glm::fvec3 **createMap(int map_width, int map_height, int *max)
 {
 
+    
     glm::fvec3 **lattice = (glm::fvec3 **)malloc(sizeof(glm::fvec3 *) * map_width);
     for (int i = 0; i < map_width; i++)
     {
@@ -137,14 +141,9 @@ glm::fvec3 **createMap(int map_width, int map_height, glm::fvec3 m_MaxPos, glm::
     {
         for (int j = 0; j < map_height; j++)
         {
-            double divid_i = m_MaxPos.x-m_MinPos.x;
-            double divid_j = m_MaxPos.y-m_MinPos.y;
-            double divid_k = m_MaxPos.z-m_MinPos.z;
-
-
-            double i0 = (float)(rand() / (RAND_MAX + 1.0))*divid_i- (divid_i/2.0);
-            double j0 = (float)(rand() / (RAND_MAX + 1.0))*divid_j- (divid_j/2.0);
-            double k0 = (float)(rand() / (RAND_MAX + 1.0))*divid_k- (divid_k/2.0);
+            double i0 = rand() % max[0];
+            double j0 = rand() % max[1];
+            double k0 = rand() % max[2];
             // std::cout << i0 << ", " << j0<<std::endl;
             lattice[i][j] = {i0, j0, k0};
         }

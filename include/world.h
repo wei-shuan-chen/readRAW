@@ -19,10 +19,12 @@ struct World {
     std::vector<Vertex> tri;
     std::vector<Vertex> cube;
     std::vector<Vertex> voxelBall;
+    std::vector<Vertex> lattice_square_four_edges;
 };
 
 void create_world(VoxData_b* bounderVoxelData, int bounderNum,int* numVoxelFace);
 void destroy_world();
+void renew_world();
 // extern int voxelBallPointNum;
 extern struct World world;
 

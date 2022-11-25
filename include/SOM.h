@@ -4,19 +4,22 @@
 #include <vector>
 #include <glm/glm.hpp>
 
+#include "BounderVoxel.h"
 #include "Vertex.h"
 
-void SOM_Create(std::vector<Vertex> m_MeshTri, int triangleNum, glm::fvec3 m_MaxPos, glm::fvec3 m_MinPos);
+using namespace std;
+
+void SOM_Create(VoxData_b* bounderVoxelData, int bounderNum, int *max);
 void SOM_IterateOnce();
 void SOM_Destroy();
 
 extern glm::fvec3** lattice;
 extern glm::fvec3* dataset;
-extern bool is_som_finished;
-extern const int map_width;
-extern const int map_height;
+extern const int max_iter;
+extern int map_width;
+extern int map_height;
 extern int go;
-extern bool tmp;
+extern bool stop;
 extern int iter;
 extern double n_learning_rate;
 extern double neighbor;

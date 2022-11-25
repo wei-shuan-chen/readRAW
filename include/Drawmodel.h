@@ -14,7 +14,7 @@ void Shader_init(glm::vec3 position, glm::vec3 front, bool blinn);
 
 void ViewProjection_Create(glm::mat4 viewMatrix, float zoom, int width, int height);
 void Model_Floor_Create(unsigned int VAO);
-void Model_Cube_Create(unsigned int VAO);
+void Model_lattice_Create(unsigned int VAO, int size);
 void Model_Create(unsigned int VAO, int numVoxelFace, float x, float z);
 
 

@@ -13,11 +13,12 @@ out VS_OUT{
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
-
+uniform bool shader;
 void main()
 {
 	vs_out.FragPos = vec3(model * vec4(aPos, 1.0));
-	vs_out.Normal = mat3(transpose(inverse(model))) * aNormal; 
+	if(shader) vs_out.Normal = mat3(transpose(inverse(model))) * aNormal; 
+	else vs_out.Normal = vec3(0.0,0.0,0.0);
 	// TexCoords = aTexCoords;
 	gl_Position = projection * view * vec4(vs_out.FragPos, 1.0);
 	

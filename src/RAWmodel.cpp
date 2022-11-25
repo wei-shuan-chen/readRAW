@@ -67,11 +67,11 @@ bool RAWmodel::LoadINFfile(const char* infFileName){
 
     fgets(buffer, sizeof(buffer), file);//Min=XXX:XXX:XXX
     sscanf(buffer, "Min=%f:%f:%f",&infdata.min[0],&infdata.min[1],&infdata.min[2]);
-    // std::cout << "min : "<<infdata.min[0] << ", " << infdata.min[1] << ", " << infdata.min[2] << std::endl;
+    std::cout << "min : "<<infdata.min[0] << ", " << infdata.min[1] << ", " << infdata.min[2] << std::endl;
 
     fgets(buffer, sizeof(buffer), file);//Max=XXX:XXX:XXX
     sscanf(buffer, "Max=%f:%f:%f",&infdata.max[0],&infdata.max[1],&infdata.max[2]);
-    // std::cout <<"max : "<< infdata.max[0] << ", " << infdata.max[1] << ", " << infdata.max[2] << std::endl;
+    std::cout <<"max : "<< infdata.max[0] << ", " << infdata.max[1] << ", " << infdata.max[2] << std::endl;
 
 
     if (feof(file))

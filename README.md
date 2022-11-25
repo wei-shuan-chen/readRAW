@@ -1,4 +1,5 @@
 # readRAWfile
+## 用毒進來的raw檔做SOM
 
 ###### 先做voxelizer ######
 
@@ -18,12 +19,21 @@
 ![](./image/code2.png)
 
 ### 執行畫面
+** 用網格做訓練，容易產生扭曲 **
+
 - resolution為21*21*21的球體
 
 ![](./image/ball21.png)
+![](./image/ball21_1.png)
+![](./image/ball21_2.png)
+![](./image/ball21_3.png)
+
 - resolution為67*67*67的球體
 
 ![](./image/ball67.png)
+![](./image/ball67_1.png)
+![](./image/ball67_2.png)
+![](./image/ball67_3.png)
 
 - resolution為257*257*257的球體
 
