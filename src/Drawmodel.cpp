@@ -42,8 +42,8 @@ void ViewProjection_Create(glm::mat4 viewMatrix, float zoom, int width, int heig
 void Model_Create(unsigned int VAO, int numVoxelFace, float x, float z){
     model.Push();
     // model.Save(glm::scale(model.Top(), glm::vec3( 0.1, 0.1, 0.1)));
-    model.Save(glm::translate(model.Top(), glm::vec3(2*x,0,0)));
-    model.Save(glm::rotate(model.Top(),glm::radians(90.0f),glm::vec3(0.0f,0.0f,1.0f)));
+    // model.Save(glm::translate(model.Top(), glm::vec3(2*x,0,0)));
+    // model.Save(glm::rotate(model.Top(),glm::radians(90.0f),glm::vec3(0.0f,0.0f,1.0f)));
     ourShader.setVec3("objectColor", 1.0f, 0.0f, 0.0f);
     ourShader.setMat4("model", model.Top());
     ourShader.setBool("shader",true);

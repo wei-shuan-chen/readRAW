@@ -21,7 +21,7 @@
 ### 執行畫面
 ** 用網格做訓練，容易產生扭曲 **
 
-- resolution為21*21*21的球體
+- resolution為21x21x21的球體
 
 ![](./image/ball21.png)
 
@@ -32,7 +32,7 @@
 ![](./image/ball21_3.png)
 
 
-- resolution為67*67*67的球體
+- resolution為67x67x67的球體
 
 ![](./image/ball67.png)
 
@@ -43,13 +43,15 @@
 ![](./image/ball67_3.png)
 
 
-- resolution為257*257*257的球體
+- resolution為257x257x257的球體
 
 ![](./image/ball257.png)
 
-- resolution為476*301*238的茶壺
+- resolution為476x301x238的茶壺
 
 ![](./image/tea.png)
 
+# 注意
+RAND_MAX最大只有到3萬，但我的點有17萬，所以一直訓練失敗
 
 ###### 跟之前的程式比把一些畫圖的東西都定義header和cpp ######

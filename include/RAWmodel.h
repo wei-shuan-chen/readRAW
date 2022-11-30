@@ -8,7 +8,7 @@
 #include "BounderVoxel.h"
 
 typedef unsigned char  BYTE;
-
+using namespace std;
 typedef struct InfData_t {
 	int resolution[3];//inf size
 	char sampleType[15];
@@ -27,6 +27,7 @@ public:
 
     InfData_t infdata;
     VoxData_b* bounderVoxelData;
+    int bounderMaxLocate[3] = {0, 0, 0};
     int*** voxelData; // 0 air, 1 bounder, 2 inside
     int bounderNum;
     
@@ -40,6 +41,7 @@ private:
     void CreateBounderVoxelLocate();
     void SetbounderVoxelFaceAir(int i, int j, int k, int num);
     void checkComputerEndian();
+    void setMaxbounder(int i, int j, int k);
 
     BYTE* uc_voxelData;
     float* f_voxelData;

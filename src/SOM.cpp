@@ -44,6 +44,8 @@ void SOM_Create(VoxData_b* bounderVoxelData, int bounderNum, int *max)
     dataset = createInputDataset(bounderVoxelData, bounderNum);
 
     datasteNum = bounderNum;
+    cout << datasteNum << endl;
+    cout << RAND_MAX <<endl;
 }
 
 void SOM_IterateOnce()
@@ -63,23 +65,21 @@ void SOM_IterateOnce()
     {
         for (int j = 0; j < map_height; j++)
         {
-            double tmp = 0.0;
-            tmp = pow(lattice[i][j].x - nowInput.x, 2) + pow(lattice[i][j].y - nowInput.y, 2)+ pow(lattice[i][j].z - nowInput.z, 2);
-
+            double tmp1 = 0.0;
+            float dx = (lattice[i][j].x - nowInput.x);
+            float dy = (lattice[i][j].y - nowInput.y);
+            float dz = (lattice[i][j].z - nowInput.z);
+            tmp1 = dx*dx + dy*dy+ dz*dz;
             if (minDist < 0.0)
             {
-                minDist = tmp;
-                bmu.x = 0;
-                bmu.y = 0;
+                minDist = tmp1;
+                continue;
             }
-            else
+            
+            if (minDist > tmp1)
             {
-                if (minDist > tmp)
-                {
-                    minDist = tmp;
-                    bmu.x = i;
-                    bmu.y = j;
-                }
+                minDist = tmp1;
+                bmu = {i, j};
             }
         }
     }
@@ -141,7 +141,7 @@ glm::fvec3 **createMap(int map_width, int map_height, int *max)
     {
         for (int j = 0; j < map_height; j++)
         {
-            double i0 = rand() % max[0];
+            double i0 = (rand() % abs(max[0]-1))*(-1);
             double j0 = rand() % max[1];
             double k0 = rand() % max[2];
             // std::cout << i0 << ", " << j0<<std::endl;
@@ -174,7 +174,7 @@ double computerate(int iter, double fun)
 
 const glm::fvec3 getInput(glm::fvec3 *dataset, int datasteNum)
 {
-    int i = rand() % datasteNum;
+    int i = (rand() *7)% datasteNum;
     return dataset[i];
 }
 

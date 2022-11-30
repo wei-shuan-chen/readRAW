@@ -34,7 +34,7 @@ float lastFrame = 0.0f;
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-Camera camera(glm::vec3(10.0f, 20.0f, 150.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+Camera camera(glm::vec3(-10.0f, 200.0f, 350.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 //light
 bool blinn = false;
 bool blinnKeyPressed = false;
@@ -81,11 +81,11 @@ int main()
 	OurShader_Create();
 	int numVoxelFace = 0;
 	RAWmodel rawmodel;
-	// rawmodel.LoadFile("raw/tetrahedronno.inf", "raw/tetrahedronno.raw");
 	// rawmodel.LoadFile("raw/cube.inf", "raw/cube.raw");
-	rawmodel.LoadFile("raw/ball67.inf", "raw/ball67.raw");
+	rawmodel.LoadFile("raw/vase01.inf", "raw/vase01.raw");
+	// rawmodel.LoadFile("raw/ball257.inf", "raw/ball257.raw");
 	// rawmodel.LoadFile("raw/utah_teapot.inf", "raw/utah_teapot.raw");
-	SOM_Create(rawmodel.bounderVoxelData, rawmodel.bounderNum, rawmodel.infdata.resolution);
+	SOM_Create(rawmodel.bounderVoxelData, rawmodel.bounderNum, rawmodel.bounderMaxLocate);
 	create_world(rawmodel.bounderVoxelData, rawmodel.bounderNum,&numVoxelFace);
 	Item floor(world.square);
 	Item voxelball(world.voxelBall);

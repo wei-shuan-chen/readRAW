@@ -197,7 +197,7 @@ void RAWmodel::CreateBounderVoxelLocate(){
 void RAWmodel::SetVoxelData(){
 
     int num = 0;
-    for(int i = 0; i < infdata.resolution[02]; i++){
+    for(int i = 0; i < infdata.resolution[2]; i++){
         for(int j = 0; j < infdata.resolution[1]; j++){
             for(int k = 0; k < infdata.resolution[0]; k++){
                 // std::cout << voxelData[i][j][k] <<" ";
@@ -207,14 +207,20 @@ void RAWmodel::SetVoxelData(){
                 else if(voxelData[i][j][k] == 253)voxelData[i][j][k] = 26;
                 else if(voxelData[i][j][k] == 255){
                     voxelData[i][j][k] = 6;
-                    bounderVoxelData[num].bounderVoxelLocate = {i,j,k};
+                    bounderVoxelData[num].bounderVoxelLocate = {j-infdata.resolution[1],i,k};
+                    setMaxbounder(j-(infdata.resolution[1]), i, k);
                     SetbounderVoxelFaceAir(i,j,k, num);
                     num++;
                 }
             }
         }
     }
-    
+    // cout << num << endl;
+}
+void RAWmodel::setMaxbounder(int i, int j, int k){
+    if(bounderMaxLocate[0] > i) bounderMaxLocate[0] = i;
+    if(bounderMaxLocate[1] < j) bounderMaxLocate[1] = j;
+    if(bounderMaxLocate[2] < k) bounderMaxLocate[2] = k;
 }
 void RAWmodel::SetbounderVoxelFaceAir(int i, int j, int k, int num){
     
