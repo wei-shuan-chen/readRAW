@@ -1,5 +1,5 @@
 # readRAWfile
-## 用毒進來的raw檔做SOM
+## 用讀進來的raw檔做SOM
 
 ###### 先做voxelizer ######
 
